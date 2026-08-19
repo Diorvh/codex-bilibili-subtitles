@@ -1,24 +1,24 @@
-# Troubleshooting
+# 故障排查
 
-Keep troubleshooting local and minimal. Never paste browser Cookies, passwords, full verbose logs, or browser database files into chat or a public issue.
+故障排查应保持在本机，并且只收集必要信息。不得把浏览器 Cookie、密码、完整详细日志或浏览器数据库文件粘贴到对话或公开 Issue 中。
 
-## yt-dlp is not found
+## 找不到 yt-dlp
 
-From the repository root, install the pinned dependency into the Python environment that will run the script:
+在仓库根目录中，将固定版本依赖安装到实际运行脚本的 Python 环境：
 
 ```text
 python -m pip install -r requirements.txt
 ```
 
-Then verify:
+然后检查版本：
 
 ```text
 python -m yt_dlp --version
 ```
 
-## The wrong browser profile is selected
+## 选择了错误的浏览器配置文件
 
-Use `--profile` with the profile name or profile directory supported by yt-dlp. Examples:
+通过 `--profile` 指定 yt-dlp 支持的配置文件名称或目录。例如：
 
 ```text
 python scripts/extract_subtitles.py VIDEO_URL --browser firefox --profile default-release --acknowledge-terms
@@ -26,40 +26,40 @@ python scripts/extract_subtitles.py VIDEO_URL --browser chrome --profile "Profil
 python scripts/extract_subtitles.py VIDEO_URL --browser edge --profile "Profile 2" --acknowledge-terms
 ```
 
-Do not copy the profile or Cookie database into the repository. Do not publish its path in an issue if the path identifies the local account.
+不要把浏览器配置文件或 Cookie 数据库复制到仓库中。如果本机路径能够识别用户账号，也不要在 Issue 中公开该路径。
 
-## The Cookie database is locked
+## Cookie 数据库被占用
 
-Save browser work and fully close the selected browser, including background processes, then retry. Reopen the browser afterward. If the error persists, update to the pinned yt-dlp version and check upstream browser-Cookie documentation without exporting Cookies.
+保存浏览器中的工作，完全退出所选浏览器及其后台进程，然后重试；提取完成后可以重新打开浏览器。如果问题仍然存在，请更新到仓库固定的 yt-dlp 版本并检查上游浏览器 Cookie 文档，不要导出 Cookie。
 
-## DPAPI, keychain, or keyring errors
+## DPAPI、钥匙串或 keyring 错误
 
-Run the script as the same operating-system user who owns the browser profile. On Linux, Chromium-derived browsers may require `--keyring basictext`, `gnomekeyring`, `kwallet`, `kwallet5`, or `kwallet6`. `--keyring` is intentionally rejected for Firefox and Safari.
+请使用拥有该浏览器配置文件的同一个操作系统用户运行脚本。在 Linux 上，Chromium 系浏览器可能需要 `--keyring basictext`、`gnomekeyring`、`kwallet`、`kwallet5` 或 `kwallet6`。Firefox 和 Safari 会按设计拒绝 `--keyring` 参数。
 
 ## Firefox Container
 
-Use `--container NAME`, or `--container none` when required by yt-dlp. The option is intentionally rejected for non-Firefox browsers.
+使用 `--container NAME`；在 yt-dlp 要求时也可以使用 `--container none`。非 Firefox 浏览器会按设计拒绝该参数。
 
 ## Safari
 
-Safari Cookie extraction is supported only on macOS. Granting terminal access to protected browser data may be controlled by macOS privacy settings. Do not weaken system-wide protections solely for this tool.
+Safari Cookie 提取只支持 macOS。终端能否访问受保护的浏览器数据可能受 macOS 隐私设置控制。不要仅为了使用本工具而降低系统范围的安全保护。
 
-## The player shows subtitles but the script finds none
+## 播放器显示字幕，但脚本没有找到字幕
 
-Check that:
+请检查：
 
-1. the same browser profile can open the exact video and manually select the desired subtitle;
-2. the URL points to one ordinary `/video/BV...` or `/video/av...` page;
-3. the requested selector matches the track (default: `zh.*`);
-4. the browser session has not expired;
-5. the platform has not changed its response format.
+1. 同一浏览器配置文件能够打开该视频并手动选择所需字幕；
+2. 链接指向普通的单个 `/video/BV...` 或 `/video/av...` 页面；
+3. 字幕语言选择器与实际轨道匹配，默认值为 `zh.*`；
+4. 浏览器登录会话尚未过期；
+5. 平台没有更改响应格式。
 
-Run yt-dlp's subtitle-listing mode manually only if needed, without verbose logging or Cookie export. Platform changes may require an upstream yt-dlp update; do not add scraping fallbacks that bypass normal access controls.
+只有确有必要时才手动运行 yt-dlp 的字幕列表模式，并且不要启用详细日志或导出 Cookie。平台变化可能需要等待 yt-dlp 上游更新；不要增加绕过正常访问控制的抓取后备方案。
 
-## Membership or paid-format warnings
+## 会员或付费格式警告
 
-The script requests subtitles only. yt-dlp may still print information about unavailable video formats during page inspection. That does not mean the script will download media. Do not attempt to bypass membership or payment restrictions.
+脚本只请求字幕。yt-dlp 在检查页面时仍可能输出不可用视频格式的信息，但这不代表脚本会下载媒体。不要尝试绕过会员或付费限制。
 
-## Existing files are not overwritten
+## 现有文件没有被覆盖
 
-The extractor uses `--no-overwrites`, and the formatter preserves existing transcript derivatives. Move or rename a previous output if you intentionally want a fresh copy. This prevents an automated retry from destroying user edits.
+提取程序使用 `--no-overwrites`，整理程序也会保留已经存在的文稿衍生文件。如果确实需要重新生成，请先移动或重命名旧输出。这项设计可以防止自动重试破坏用户已经做过的修改。

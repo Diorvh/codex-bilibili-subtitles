@@ -1,64 +1,64 @@
-# Privacy, platform terms, and copyright boundary
+# 隐私、平台条款与版权边界
 
-This reference explains the project's intended safeguards. It is not legal advice and cannot determine whether a particular use is lawful.
+本文说明本项目有意采用的保护措施，不构成法律意见，也不能替具体使用行为判断是否合法或合规。
 
-## Platform-contract risk
+## 平台协议风险
 
-Bilibili's user agreement should be checked before every material use because platform terms can change. As reviewed on 2026-08-19, the agreement described the service as non-commercial absent written consent and prohibited obtaining platform services, content, or data through robots, spiders, crawlers, automatic programs, or scripts without written permission. That creates a meaningful terms-of-service and account-enforcement risk even when a user can watch the video normally.
+B 站平台条款可能变化，因此每次重要使用前都应重新检查用户协议。截至 2026-08-19 的审阅结果，协议在未取得书面同意时将服务限定为非商业用途，并限制未经书面许可通过机器人、蜘蛛、爬虫、自动程序或脚本获取平台服务、内容或数据。即使用户能够正常观看视频，自动提取仍可能带来平台协议和账号处置风险。
 
-Source: [Bilibili User Agreement](https://www.bilibili.com/blackboard/user-rule-linux.html?night=1&padding=0), especially the sections governing non-commercial use and automated collection.
+来源：[哔哩哔哩用户协议](https://www.bilibili.com/blackboard/user-rule-linux.html?night=1&padding=0)，尤其是有关非商业使用和自动化获取的条款。
 
-Therefore:
+因此：
 
-- do not say the workflow is “basically risk-free”;
-- prefer content owned by the user or content for which the user has explicit permission;
-- keep requests isolated, manual, and low-frequency;
-- stop if the platform presents an access challenge or denial;
-- do not create evasion, stealth, account-rotation, or bulk-collection features.
+- 不得把本流程描述为“基本没有风险”或“绝对合规”；
+- 优先处理用户本人拥有，或已经取得明确许可的内容；
+- 请求应保持单次、手动和低频；
+- 平台出现访问挑战、拒绝或限制时应停止；
+- 不得增加规避、隐蔽、账号轮换或批量采集功能。
 
-## Copyright risk
+## 版权风险
 
-A subtitle or transcript may contain copyrighted expression independent of the software used to retrieve it. Access does not automatically confer the right to reproduce, publish, distribute, translate, or commercialize the full transcript.
+字幕和文稿本身可能包含受版权保护的表达，与获取它们所使用的软件无关。能够访问内容并不自动赋予复制、发布、传播、翻译或商业使用完整文稿的权利。
 
-Article 24 of the Copyright Law of the People's Republic of China includes limited circumstances such as personal study or research and appropriate quotation, subject to attribution and non-interference conditions. Whether an actual use qualifies is fact-specific.
+《中华人民共和国著作权法》第二十四条列举了个人学习、研究和适当引用等有限情形，并附有署名、不影响作品正常使用等条件。具体使用是否符合这些条件，需要结合实际事实判断。
 
-Source: [Copyright Law of the People's Republic of China](https://www.npc.gov.cn/c2/c30834/202011/t20201119_308796.html), Article 24.
+来源：[《中华人民共和国著作权法》](https://www.npc.gov.cn/c2/c30834/202011/t20201119_308796.html)第二十四条。
 
-Lower-risk patterns generally include private, limited processing of content the user owns or is authorized to use. Higher-risk patterns include publishing a complete third-party transcript, monetizing it, building a searchable corpus, or substituting for the original work.
+风险相对较低的情形通常包括：用户对自己拥有或已获授权的内容进行私下、有限处理。风险较高的情形包括：发布完整第三方文稿、将文稿商业化、建立可检索语料库，或用文稿替代原作品。
 
-## Repository policy
+## 仓库政策
 
-The MIT License covers only this repository's original code and documentation. It does not license:
+MIT License 只适用于本仓库自行编写的代码和文档，不适用于：
 
-- Bilibili videos or subtitle tracks;
-- creators' speech, scripts, images, music, or trademarks;
-- browser Cookies or account data;
-- yt-dlp or any other third-party dependency.
+- B 站视频或字幕轨道；
+- 创作者的口播、脚本、图像、音乐或商标；
+- 浏览器 Cookie 或账号数据；
+- yt-dlp 或其他第三方依赖。
 
-The public repository must contain no extracted third-party subtitle, video, audio, or browser data. Synthetic fixtures must be written specifically for testing.
+公开仓库不得包含提取出来的第三方字幕、视频、音频或浏览器数据。测试用虚构材料必须专门为测试自行编写。
 
-## Privacy design
+## 隐私设计
 
-- Credentials are never requested through chat or command-line options.
-- Cookie files are not accepted or exported.
-- The user initiates authenticated extraction in their own terminal.
-- Browser Cookies are read by yt-dlp in process, subject to yt-dlp and operating-system behavior.
-- The plugin does not run a remote service and does not upload subtitle output.
-- Verbose request logging is discouraged.
+- 不通过对话或命令行参数索取凭据；
+- 不接受或导出 Cookie 文件；
+- 需要登录状态的提取由用户在自己的终端中启动；
+- 浏览器 Cookie 由 yt-dlp 在进程中读取，具体行为仍受 yt-dlp 和操作系统约束；
+- 插件不运行远程服务，也不会上传字幕输出；
+- 不建议启用没有必要的详细请求日志。
 
-yt-dlp documents that exported Cookie files may include Cookies for every site in the browser profile and therefore require strong protection. This project avoids that export workflow. See the [yt-dlp FAQ](https://github.com/yt-dlp/yt-dlp/wiki/FAQ).
+yt-dlp 文档指出，导出的 Cookie 文件可能包含同一浏览器配置文件中多个网站的 Cookie，因此必须受到严格保护。本项目有意避免使用这种导出流程。参见 [yt-dlp FAQ](https://github.com/yt-dlp/yt-dlp/wiki/FAQ)。
 
-## Open-source hosting
+## 开源托管
 
-Publishing neutral source code is distinct from publishing copied subtitle content, but repository hosts can still remove content that violates their policies or receives a valid legal complaint. Contributors should review [GitHub's Acceptable Use Policies](https://docs.github.com/en/site-policy/acceptable-use-policies/github-acceptable-use-policies) and [DMCA Takedown Policy](https://docs.github.com/en/site-policy/content-removal-policies/dmca-takedown-policy).
+发布中立的源代码与发布复制出来的字幕内容并不是同一件事，但仓库托管平台仍可能删除违反其政策或收到有效法律投诉的内容。贡献者应阅读 [GitHub 可接受使用政策](https://docs.github.com/en/site-policy/acceptable-use-policies/github-acceptable-use-policies)和 [DMCA 下架政策](https://docs.github.com/en/site-policy/content-removal-policies/dmca-takedown-policy)。
 
-## Stop conditions
+## 必须停止的情形
 
-Do not proceed when:
+出现下列情况时不得继续：
 
-- the user asks to bypass access controls or conceal automation;
-- credentials do not belong to the user;
-- the user wants a bulk archive or complete third-party transcript corpus;
-- the intended use is redistribution or commercialization without rights clearance;
-- the platform rejects the request or demands a challenge the normal browser session cannot satisfy;
-- applicable law, employer policy, school policy, or platform terms prohibit the action.
+- 用户要求绕过访问控制或隐藏自动化行为；
+- 登录凭据不属于当前用户；
+- 用户要求批量归档或建立完整第三方文稿语料库；
+- 未取得权利许可，却计划传播或商业化相关内容；
+- 平台拒绝请求，或要求正常浏览器会话无法满足的挑战；
+- 适用法律、单位政策、学校政策或平台条款禁止该行为。

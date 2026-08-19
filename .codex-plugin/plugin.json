@@ -1,7 +1,7 @@
 {
   "name": "bilibili-subtitles",
   "version": "0.1.0",
-  "description": "Extract subtitle tracks from authorized Bilibili videos using a local browser session, then format them as readable transcripts.",
+  "description": "B站字幕提取：使用本机浏览器登录会话提取用户有权访问的 Bilibili 字幕，并整理为可读文稿。",
   "author": {
     "name": "FLH20",
     "url": "https://github.com/Diorvh"
@@ -11,22 +11,26 @@
   "license": "MIT",
   "keywords": [
     "bilibili",
+    "bilibili-subtitles",
     "subtitles",
+    "subtitle-extractor",
     "transcript",
+    "codex-skill",
     "yt-dlp",
-    "browser-cookies"
+    "browser-cookies",
+    "chinese-subtitles"
   ],
   "skills": "./skills/",
   "interface": {
-    "displayName": "Bilibili Subtitles",
-    "shortDescription": "Extract authorized subtitles with local browser login",
-    "longDescription": "A privacy-conscious, skills-only plugin for extracting subtitle tracks from individual Bilibili videos that the user is authorized to access. Browser credentials stay local, media is not downloaded, and subtitle files can be converted into readable transcripts.",
+    "displayName": "B站字幕提取 / Bilibili Subtitles",
+    "shortDescription": "提取 B 站已有字幕 / Extract Bilibili subtitles",
+    "longDescription": "面向中文用户的轻量级纯 Skill 插件：从用户有权访问的单个 B 站视频中提取已有字幕，凭据保留在本机，不下载音视频，并生成可读文稿。 Extract authorized Bilibili subtitles locally without downloading media.",
     "developerName": "FLH20",
     "category": "Productivity",
     "capabilities": [
       "Read",
       "Write"
     ],
-    "defaultPrompt": "Extract subtitles from a Bilibili video I am authorized to access and turn them into a readable transcript."
+    "defaultPrompt": "请提取我有权访问的 B 站视频已有字幕，不下载音视频，并整理为可读文稿。"
   }
 }

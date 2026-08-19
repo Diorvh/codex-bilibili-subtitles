@@ -1,76 +1,95 @@
-# Bilibili Subtitles
+# B站字幕提取（Bilibili Subtitles）
 
-[简体中文](README.zh-CN.md)
+[English](README.en.md)
 
-A lightweight, skills-only Codex plugin for extracting an existing subtitle track from one Bilibili video that the user is authorized to access, then producing searchable, readable transcript files locally. The repository includes the skill workflow, directly executable Python scripts, offline tests, and clear privacy and usage boundaries.
+> B站字幕提取——将 Bilibili 播放器已有字幕转换为本地可检索文稿的 Codex Skill。
+>
+> A Codex Skill that extracts existing Bilibili subtitle tracks into searchable local transcripts.
 
-For interviews, podcasts, lectures, game guides, and other speech-focused videos, the visuals may not be necessary to understand the content. When the desired subtitle can be selected and displayed in the browser player, this plugin can usually retrieve it without downloading video or audio. Actual availability still depends on account access, the subtitle track, browser compatibility, and future changes to Bilibili and yt-dlp.
+这是一个面向 Codex 的轻量级纯 Skill 插件，用于从用户有权访问的单个 B 站视频中提取播放器已经提供的字幕轨道，并在本地生成便于检索和阅读的文稿。仓库同时提供 Skill 工作流程、可直接运行的 Python 脚本、离线测试，以及隐私和使用边界说明。
 
-Typical uses include:
+This is a lightweight, skills-only Codex plugin that extracts subtitle tracks already provided by the Bilibili player from a single video the user is authorized to access, then generates searchable and readable transcript files locally. The repository includes the Skill workflow, directly executable Python scripts, offline tests, and clear privacy and usage boundaries.
 
-- reading long interviews, daily commentary, and podcast-style videos more efficiently;
-- extracting text from lectures, software tutorials, and game guides;
-- turning an existing subtitle track into a searchable document for annotation or later analysis;
-- asking Codex to create a separate summary, outline, or corrected copy while preserving the source subtitle.
+对于访谈、播客、课程讲解、游戏攻略和其他以口播信息为主的视频，画面往往不是理解内容的必要条件。只要目标视频在浏览器播放器中能够选择并显示字幕，本插件通常即可在不下载视频或音频的情况下提取相应字幕，从而帮助用户更高效地阅读、检索和整理口播内容。实际可用性仍取决于账号权限、字幕轨道状态、浏览器兼容性，以及 B 站和 yt-dlp 的后续变化。
+
+For interviews, podcasts, lectures, game guides, and other speech-focused videos, the visuals are often unnecessary for understanding the content. As long as the required subtitle track can be selected and displayed in the browser player, this plugin can usually extract it without downloading the video or audio, making spoken content easier to read, search, and organize. Actual availability still depends on account permissions, subtitle-track status, browser compatibility, and future changes to Bilibili or yt-dlp.
+
+典型应用场景包括：
+
+- 快速阅读日更访谈、播客式视频或其他长篇口播内容；
+- 提取课程讲解、软件教程和游戏攻略中的文字信息；
+- 将已有字幕整理为便于搜索、批注或后续总结的本地文稿；
+- 在保留原始字幕的前提下，由 Codex 另行生成摘要、提纲或校正稿。
+
+Typical use cases include:
+
+- Quickly reading daily interviews, podcast-style videos, and other long-form spoken content.
+- Extracting textual information from lectures, software tutorials, and game guides.
+- Turning existing subtitles into local transcripts that are convenient to search, annotate, and summarize.
+- Asking Codex to create separate summaries, outlines, or corrected drafts while preserving the original subtitles.
 
 > [!WARNING]
-> Bilibili's user agreement may restrict automated scripts that obtain platform content or data without written permission. Being able to play the video, being signed in, or using the result only for personal purposes does not necessarily make automated extraction compliant with platform terms or applicable law. This project does not guarantee the legality of any particular use. Before proceeding, independently confirm your authorization, applicable law, and the platform terms then in effect. See [Legal, copyright, and privacy boundaries](skills/extract-bilibili-subtitles/references/privacy-and-legal.md).
+> B 站用户协议可能限制未经书面许可、通过自动程序或脚本获取平台内容或数据。能够正常播放、已经登录或仅供个人使用，并不必然意味着自动提取符合平台协议或适用法律。本项目不对任何具体用途作出合法性保证。使用前请自行确认内容授权、适用法律以及当时有效的平台条款。详见[法律、版权和隐私边界](skills/extract-bilibili-subtitles/references/privacy-and-legal.md)。
+>
+> Bilibili's terms may restrict using automated programs or scripts to access platform content or data without written permission. The ability to play a video, an authenticated session, or personal use alone does not necessarily mean that automated extraction complies with the platform's terms or applicable law. This project makes no representation that any particular use is lawful. Before using it, independently verify your authorization, applicable law, and the platform terms then in effect. See [Legal, Copyright, and Privacy Boundaries](skills/extract-bilibili-subtitles/references/privacy-and-legal.md) for details.
+
+本项目与哔哩哔哩及 yt-dlp 均无隶属、授权、背书或赞助关系。
 
 This project is not affiliated with, authorized by, endorsed by, or sponsored by Bilibili or yt-dlp.
 
-## Key characteristics
+## 本插件的主要特点（Key Features）
 
-- **Subtitle-only operation:** uses subtitle-specific options and never downloads video or audio. A subtitle file is commonly only tens of kilobytes, depending on its length and format.
-- **Credentials remain local:** yt-dlp reads an existing local browser session in process. The user never needs to paste an account, password, or Cookie into Codex, and the plugin never exports a Cookie file.
-- **Broad browser support:** Firefox, Chrome, Edge, Chromium, Brave, Opera, Vivaldi, Whale, and Safari on macOS.
-- **Agent-friendly workflow:** the skill gives Codex a repeatable procedure and explicit permission boundaries instead of asking the agent to design a new extractor each time.
-- **Source-preserving outputs:** the original SRT remains untouched; faithful TXT, readable Markdown, corrections, and summaries remain separate artifacts.
-- **Narrow automation scope:** one explicit video per invocation, with no playlists, bulk URL lists, CAPTCHA bypass, DRM bypass, or access-control evasion.
+- **只提取字幕**：使用字幕专用参数，不下载视频或音频；单个字幕文件通常仅为数十 KB，具体大小取决于字幕长度和格式。
+- **凭据保持在本机**：通过 yt-dlp 在进程中读取本机浏览器的现有登录会话，不要求用户将账号、密码或 Cookie 粘贴到 Codex，也不会导出 Cookie 文件。
+- **支持多种常见浏览器**：覆盖 Firefox、Chrome、Edge、Chromium、Brave、Opera、Vivaldi、Whale，以及 macOS 上的 Safari。
+- **适合 Agent 使用**：Skill 提供明确的操作流程和权限边界，Codex 可以快速生成对应命令，而无需每次重新设计提取程序。
+- **保留原始结果**：原始 SRT 字幕不会被修改；TXT 忠实文稿、Markdown 阅读稿、校正稿和摘要彼此分离。
+- **限制自动化范围**：每次仅处理一个明确的视频链接，不支持播放列表、批量链接、验证码绕过、DRM 绕过或访问控制规避。
 
-## Quick start
+- **Subtitle-only extraction:** Uses subtitle-specific options and does not download video or audio. A subtitle file is typically only tens of kilobytes, depending on its length and format.
+- **Credentials remain local:** yt-dlp reads the existing local browser session in process. Users do not need to paste account names, passwords, or cookies into Codex, and no cookie file is exported.
+- **Common browser support:** Works with Firefox, Chrome, Edge, Chromium, Brave, Opera, Vivaldi, Whale, and Safari on macOS.
+- **Agent-friendly workflow:** The Skill defines a clear workflow and permission boundaries, allowing Codex to prepare the appropriate command without redesigning the extraction process each time.
+- **Original results are preserved:** The source SRT is left unchanged, while faithful TXT transcripts, Markdown reading copies, corrected drafts, and summaries remain separate.
+- **Bounded automation:** Each run handles one explicit video URL only. Playlists, URL batches, CAPTCHA bypass, DRM bypass, and access-control circumvention are not supported.
 
-### 1. Prepare the browser session
+## 快速使用
 
-1. Sign in to Bilibili in Firefox, Chrome, Edge, or another supported browser.
-2. Open the target video page.
-3. Confirm that the desired subtitle can be selected and displayed in the player.
-4. If the browser Cookie database is reported as locked, save your work, fully exit that browser, and retry. You can reopen it after extraction finishes.
+### 1. 准备浏览器登录状态
 
-Do not send a Bilibili account, password, Cookie, or browser profile to Codex, and do not export `cookies.txt`.
+1. 使用 Firefox、Chrome、Edge 或其他受支持的浏览器登录 B 站。
+2. 打开目标视频页面。
+3. 在播放器中确认“字幕”菜单可以选择并正常显示所需字幕。
+4. 如果运行时提示浏览器 Cookie 数据库正在使用，可保存当前工作并完全退出该浏览器后重试；提取完成后可以重新打开浏览器。
 
-### 2. Install the runtime dependency
+不要把 B 站账号、密码、Cookie 或浏览器配置文件发送给 Codex，也不要导出 `cookies.txt`。
 
-From the repository root on Windows PowerShell:
+### 2. 安装运行依赖
+
+在仓库根目录打开 Windows PowerShell，创建独立的 Python 环境并安装固定依赖：
 
 ```powershell
 py -3 -m venv .venv
 .\.venv\Scripts\python.exe -m pip install -r requirements.txt
 ```
 
-On macOS or Linux:
+完成一次安装后，后续通常无需重复执行。
 
-```bash
-python3 -m venv .venv
-.venv/bin/python -m pip install -r requirements.txt
-```
+### 3. 由 Codex 协助生成命令
 
-This setup normally needs to be completed only once.
-
-### 3. Ask Codex to prepare the command
-
-After installing the plugin or placing `skills/extract-bilibili-subtitles` in the Codex skills directory, start a new Codex task and use a prompt such as:
+安装本插件或将 `skills/extract-bilibili-subtitles` 放入 Codex 的 Skills 目录后，请新建一个 Codex 任务，并发送类似指令：
 
 ```text
-Use $extract-bilibili-subtitles to extract the existing Chinese subtitle from this video:
+请使用 $extract-bilibili-subtitles 提取下面视频中播放器已经提供的中文字幕：
 https://www.bilibili.com/video/BVxxxxxxxxxx/
 
-I am signed in with Firefox and have confirmed that the player displays the subtitle.
-Extract subtitles only, do not download video or audio, and write to subtitle-output.
+我已经在 Firefox 中登录并确认播放器能够显示字幕。
+只提取字幕，不下载视频或音频；输出到 subtitle-output。
 ```
 
-Replace Firefox with Chrome or Edge when appropriate.
+如果使用 Chrome 或 Edge，请把提示中的浏览器名称相应改为 `Chrome` 或 `Edge`。
 
-To keep login credentials outside the conversation, the skill instructs Codex to prepare the command but not to run an authenticated extraction on the user's behalf. Review the command and run it manually in your own terminal. It normally looks like this:
+为了避免登录凭据进入对话，Skill 会要求 Codex 只准备命令，而不代替用户运行需要浏览器登录会话的提取。请检查 Codex 给出的命令，然后在自己的 PowerShell 中手动执行。命令通常类似：
 
 ```powershell
 .\.venv\Scripts\python.exe skills\extract-bilibili-subtitles\scripts\extract_subtitles.py `
@@ -79,62 +98,61 @@ To keep login credentials outside the conversation, the skill instructs Codex to
   --acknowledge-terms
 ```
 
-When it completes, return to Codex with a message such as:
+命令完成后，可以回到 Codex 并发送：
 
 ```text
-Subtitle extraction is complete. Read the subtitle and transcript files in subtitle-output.
-Preserve the source subtitle, create a separate summary, and flag names or terms that may be transcription errors.
+字幕提取已完成。请读取 subtitle-output 中生成的字幕和文稿，保留原始字幕，另外生成摘要，并标记可能识别错误的人名或术语。
 ```
 
-### 4. Review the outputs
+### 4. 查看输出结果
 
-The default output directory is `subtitle-output`. For an SRT track, the tool normally produces:
+默认输出目录为仓库根目录下的 `subtitle-output`。对于 SRT 字幕，通常会得到以下文件：
 
-- `VIDEO_ID.zh.srt`: the untouched source subtitle track;
-- `VIDEO_ID.zh.transcript.txt`: a faithful copy with one original cue per line and no timestamps;
-- `VIDEO_ID.zh.reading.md`: a readable Markdown copy grouped into five-minute sections.
+- `视频ID.zh.srt`：未经修改的原始字幕轨道；
+- `视频ID.zh.transcript.txt`：移除序号和时间戳后，每条原字幕占一行的忠实文稿；
+- `视频ID.zh.reading.md`：按五分钟分段、便于连续阅读的 Markdown 文稿。
 
-The formatter does not silently correct names, terminology, or speech-recognition homophones. Create corrections and summaries as separate derivative files instead of overwriting the SRT or faithful transcript.
+整理程序不会擅自修正人名、术语或自动字幕中的同音错误。需要校正或总结时，应另行创建衍生文件，不要覆盖原始 SRT 和忠实文稿。
 
-## Safety-focused defaults
+## 默认安全边界
 
-- Accepts only one HTTPS `bilibili.com/video/...` URL per run.
-- Reads an existing local browser login session in process; it never accepts an account, password, Cookie string, or Cookie file.
-- Uses `--skip-download` and does not download video or audio.
-- Uses `--no-playlist` and does not process playlists or bulk URL lists.
-- Requires `--acknowledge-terms` before a real request.
-- Keeps the original subtitle file unchanged.
-- Creates transcript derivatives locally and never uploads them.
-- Does not bypass CAPTCHA, DRM, membership, paywalls, or access controls.
+- 每次只接受一个 HTTPS `bilibili.com/video/...` 链接；
+- 只在进程中读取本机浏览器现有登录会话，不接受账号、密码、Cookie 字符串或 Cookie 文件；
+- 使用 `--skip-download`，不下载视频或音频；
+- 使用 `--no-playlist`，不处理播放列表或批量链接；
+- 真正发起请求前必须显式提供 `--acknowledge-terms`；
+- 原始字幕文件保持不变；
+- 文稿只在本地生成，不会自动上传；
+- 不绕过验证码、DRM、会员、付费墙或其他访问控制。
 
-## Supported browsers
+## 支持的浏览器
 
-The browser names follow yt-dlp's `--cookies-from-browser` support:
+浏览器名称与 yt-dlp 的 `--cookies-from-browser` 支持保持一致：
 
-| Browser | Option | Notes |
+| 浏览器 | 参数 | 说明 |
 |---|---|---|
-| Firefox | `firefox` | Supports an optional profile and Firefox container. |
-| Google Chrome | `chrome` | Supports an optional profile. |
-| Microsoft Edge | `edge` | Supports an optional profile. |
-| Chromium | `chromium` | Supports an optional profile. |
-| Brave | `brave` | Supports an optional profile. |
-| Opera | `opera` | yt-dlp does not support selecting an Opera profile. |
-| Vivaldi | `vivaldi` | Supports an optional profile. |
-| Whale | `whale` | Supports an optional profile. |
-| Safari | `safari` | macOS only. |
+| Firefox | `firefox` | 支持可选配置文件和 Firefox Container。 |
+| Google Chrome | `chrome` | 支持可选配置文件。 |
+| Microsoft Edge | `edge` | 支持可选配置文件。 |
+| Chromium | `chromium` | 支持可选配置文件。 |
+| Brave | `brave` | 支持可选配置文件。 |
+| Opera | `opera` | yt-dlp 不支持指定 Opera 配置文件。 |
+| Vivaldi | `vivaldi` | 支持可选配置文件。 |
+| Whale | `whale` | 支持可选配置文件。 |
+| Safari | `safari` | 仅支持 macOS。 |
 
-Browser support can change with yt-dlp and browser updates. This repository pins a tested yt-dlp version for reproducibility.
+浏览器和 yt-dlp 更新后，兼容性可能变化。仓库固定了一个已测试的 yt-dlp 版本，便于复现。
 
-## Requirements
+## 环境要求
 
-- Python 3.10 or later
-- yt-dlp 2026.7.4 (installed from the pinned dependency file)
-- A supported local browser; a subtitle that requires login must already be visible to the selected browser profile
-- Anonymous mode is available for publicly accessible subtitles
+- Python 3.10 或更高版本；
+- yt-dlp 2026.7.4，由仓库中的固定依赖安装；
+- 受支持的本机浏览器；需要登录的字幕必须在所选浏览器配置文件中已经可见；
+- 公开字幕也可以使用匿名模式。
 
-## Direct script use
+## 直接运行脚本
 
-First perform a dry run. It validates the URL and prints the command without using the network or reading browser data:
+先做离线预演。它只校验输入并显示将执行的命令，不联网，也不读取浏览器数据：
 
 ```powershell
 .\.venv\Scripts\python.exe skills\extract-bilibili-subtitles\scripts\extract_subtitles.py `
@@ -143,7 +161,7 @@ First perform a dry run. It validates the URL and prints the command without usi
   --dry-run
 ```
 
-For a real request, confirm the authorization and terms boundary explicitly:
+真正提取时，需显式确认已经独立检查权限和条款：
 
 ```powershell
 .\.venv\Scripts\python.exe skills\extract-bilibili-subtitles\scripts\extract_subtitles.py `
@@ -152,61 +170,61 @@ For a real request, confirm the authorization and terms boundary explicitly:
   --acknowledge-terms
 ```
 
-Chrome and Edge examples:
+Chrome 与 Edge：
 
 ```powershell
 .\.venv\Scripts\python.exe skills\extract-bilibili-subtitles\scripts\extract_subtitles.py VIDEO_URL --browser chrome --acknowledge-terms
 .\.venv\Scripts\python.exe skills\extract-bilibili-subtitles\scripts\extract_subtitles.py VIDEO_URL --browser edge --acknowledge-terms
 ```
 
-If the subtitle is available without login:
+字幕无需登录即可访问时：
 
 ```powershell
 .\.venv\Scripts\python.exe skills\extract-bilibili-subtitles\scripts\extract_subtitles.py VIDEO_URL --anonymous --acknowledge-terms
 ```
 
-The default output directory is `subtitle-output`. Use `--output-directory PATH` to change it.
+默认输出目录为 `subtitle-output`，也可通过 `--output-directory 路径` 指定。
 
-### Common options
+### 常用参数
 
-| Option | Purpose |
+| 参数 | 作用 |
 |---|---|
-| `--browser firefox` | Use the local Firefox session. |
-| `--browser chrome` | Use the local Chrome session. |
-| `--browser edge` | Use the local Edge session. |
-| `--profile PROFILE` | Select a browser profile name or directory when more than one profile exists. |
-| `--container NAME` | Select a Firefox Container; valid only with Firefox. |
-| `--anonymous` | Do not read a browser session; use only for publicly accessible subtitles. |
-| `--language zh.*` | Set the yt-dlp subtitle-language selector; default: `zh.*`. |
-| `--output-directory PATH` | Set the subtitle and transcript output directory. |
-| `--skip-format` | Keep the subtitle file without generating TXT and Markdown derivatives. |
-| `--dry-run` | Validate input and display the command without network or browser access. |
-| `--acknowledge-terms` | Confirm that the user independently checked authorization, applicable law, and platform terms; required for a real request. |
+| `--browser firefox` | 使用 Firefox 的本机登录会话。 |
+| `--browser chrome` | 使用 Chrome 的本机登录会话。 |
+| `--browser edge` | 使用 Edge 的本机登录会话。 |
+| `--profile PROFILE` | 指定浏览器配置文件名称或目录；电脑中存在多个配置文件时使用。 |
+| `--container NAME` | 指定 Firefox Container；仅适用于 Firefox。 |
+| `--anonymous` | 不读取浏览器登录会话；仅适用于公开可用的字幕。 |
+| `--language zh.*` | 指定 yt-dlp 字幕语言选择器；默认值为 `zh.*`。 |
+| `--output-directory PATH` | 指定字幕和文稿的输出目录。 |
+| `--skip-format` | 只保留字幕文件，不生成 TXT 和 Markdown 阅读稿。 |
+| `--dry-run` | 只验证输入和显示命令，不联网、不读取浏览器数据。 |
+| `--acknowledge-terms` | 确认使用者已自行检查内容权限、适用法律和平台条款；实际请求必须提供。 |
 
-Display the complete command reference with:
+运行以下命令可以查看完整帮助：
 
 ```powershell
 .\.venv\Scripts\python.exe skills\extract-bilibili-subtitles\scripts\extract_subtitles.py --help
 ```
 
-## Codex installation and credential boundary
+## Codex 安装位置与凭据边界
 
-The reusable skill is in `skills/extract-bilibili-subtitles`. A Codex installation can install the repository as a plugin, or the skill folder can be copied into the user's local Codex skills directory. After installing or updating it, start a new task and explicitly ask Codex to use `$extract-bilibili-subtitles`.
+可复用 Skill 位于 `skills/extract-bilibili-subtitles`。可以将整个仓库安装为 Codex 插件，也可以把该 Skill 文件夹复制到用户的 Codex Skills 目录。安装或更新后，请新建一个 Codex 任务，并在指令中明确调用 `$extract-bilibili-subtitles`。
 
-The skill deliberately instructs Codex not to run an authenticated extraction itself. Codex prepares the command; the user runs it in their own terminal so credentials remain outside the conversation.
+出于凭据隔离考虑，Skill 会要求 Codex 只准备命令，而不代替用户运行需要登录会话的提取。用户在自己的终端中执行命令，因此账号信息不会进入对话。
 
-## Tests
+## 离线测试
 
-All tests are offline and use only synthetic subtitles:
+测试仅使用仓库自带的虚构字幕，不访问网络：
 
 ```powershell
 py -3 -m unittest discover -s tests -v
 ```
 
-## Copyright, platform terms, and license
+## 版权、平台条款与许可证
 
-The original source code and documentation in this repository are licensed under the [MIT License](LICENSE). The MIT License does not apply to Bilibili videos, subtitle tracks, browser data, trademarks, or other third-party software, and it does not grant rights to copy, redistribute, adapt, translate, or commercially use that content.
+本仓库自行编写的源代码和文档采用 [MIT License](LICENSE)。MIT 许可证不适用于 B 站视频、字幕、浏览器数据、商标或其他第三方软件，也不会替使用者取得相关内容的复制、传播、改编、翻译或商业使用权。
 
-This project provides a general-purpose technical tool and does not guarantee that any particular use is lawful or compliant with platform terms. Users must independently confirm that they are authorized to access and process the target subtitle and must comply with applicable law, Bilibili's then-current user agreement, and any other relevant obligations. Do not use this project for bulk collection, access-control evasion, unauthorized republication, or other unlawful or non-compliant activity. Responsibility for a particular use remains with the person carrying it out.
+本项目仅提供通用技术工具，不构成对任何特定用途合法性或平台合规性的保证。使用者应自行确认其有权访问和处理目标字幕，并遵守适用法律、B 站当时有效的用户协议以及其他相关约定。不得将本项目用于批量抓取、访问控制规避、未经授权的内容再发布或其他违法违规用途；由具体使用行为产生的责任应由实施者自行承担。
 
-Before contributing, read [CONTRIBUTING.md](CONTRIBUTING.md) and [SECURITY.md](SECURITY.md). Do not commit real third-party subtitle tracks, video or audio files, Cookie databases, exported Cookies, account data, or request traces.
+参与贡献前请阅读 [CONTRIBUTING.md](CONTRIBUTING.md) 和 [SECURITY.md](SECURITY.md)。禁止提交真实第三方字幕、视频/音频、Cookie 数据库、导出的 Cookie、账号资料或请求日志。
