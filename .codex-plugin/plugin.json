@@ -1,7 +1,7 @@
 {
   "name": "bilibili-subtitles",
-  "version": "0.1.0",
-  "description": "B站字幕提取：使用本机浏览器登录会话提取用户有权访问的 Bilibili 字幕，并整理为可读文稿。",
+  "version": "0.1.1",
+  "description": "B站字幕提取工具：使用本机浏览器登录会话提取用户有权访问的 Bilibili 字幕，并整理为可读文稿。 Bilibili subtitle extractor and Codex Skill for local transcripts.",
   "author": {
     "name": "FLH20",
     "url": "https://github.com/Diorvh"
@@ -18,11 +18,15 @@
     "codex-skill",
     "yt-dlp",
     "browser-cookies",
-    "chinese-subtitles"
+    "chinese-subtitles",
+    "bilibili-transcript",
+    "subtitle-downloader",
+    "srt",
+    "transcript-generator"
   ],
   "skills": "./skills/",
   "interface": {
-    "displayName": "B站字幕提取 / Bilibili Subtitles",
+    "displayName": "B站字幕提取 / Bilibili Subtitle Extractor",
     "shortDescription": "提取 B 站已有字幕 / Extract Bilibili subtitles",
     "longDescription": "面向中文用户的轻量级纯 Skill 插件：从用户有权访问的单个 B 站视频中提取已有字幕，凭据保留在本机，不下载音视频，并生成可读文稿。 Extract authorized Bilibili subtitles locally without downloading media.",
     "developerName": "FLH20",

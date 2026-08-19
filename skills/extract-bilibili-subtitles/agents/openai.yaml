@@ -1,4 +1,4 @@
 interface:
-  display_name: "B站字幕提取 / Bilibili Subtitles"
+  display_name: "B站字幕提取 / Bilibili Subtitle Extractor"
   short_description: "提取 B 站已有字幕并生成文稿 / Extract Bilibili subtitles"
   default_prompt: "请使用 $extract-bilibili-subtitles 提取我有权访问的 B 站视频字幕，并整理为可读文稿。"

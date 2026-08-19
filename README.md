@@ -1,6 +1,11 @@
-# B站字幕提取（Bilibili Subtitles）
+# B站字幕提取（Bilibili Subtitle Extractor）
 
 [English](README.en.md)
+
+[![离线测试](https://github.com/Diorvh/codex-bilibili-subtitles/actions/workflows/test.yml/badge.svg)](https://github.com/Diorvh/codex-bilibili-subtitles/actions/workflows/test.yml)
+[![Python 3.10–3.14](https://img.shields.io/badge/Python-3.10%E2%80%933.14-3776AB?logo=python&logoColor=white)](https://www.python.org/)
+[![MIT License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
+[![最新版本](https://img.shields.io/github/v/release/Diorvh/codex-bilibili-subtitles?display_name=tag)](https://github.com/Diorvh/codex-bilibili-subtitles/releases/latest)
 
 > B站字幕提取——将 Bilibili 播放器已有字幕转换为本地可检索文稿的 Codex Skill。
 >
