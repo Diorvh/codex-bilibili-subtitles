@@ -1,28 +1,28 @@
-# Contributing
+# 贡献指南
 
-Contributions are welcome when they preserve the project's narrow permission, privacy, and scope boundaries.
+欢迎参与本项目。所有贡献都必须保持项目现有的权限、隐私和自动化范围边界。
 
-## Required boundaries
+## 必须遵守的边界
 
-- Keep extraction limited to one explicit Bilibili video URL per invocation.
-- Do not add playlists, bulk URL files, account rotation, proxy rotation, rate-limit evasion, CAPTCHA solving, DRM bypass, paywall bypass, or membership bypass.
-- Do not add password, Cookie-string, Cookie-file, or browser-profile upload interfaces.
-- Do not commit real subtitle tracks, media files, browser databases, account identifiers, or request logs.
-- Tests must use synthetic, contributor-authored fixtures.
-- Do not imply affiliation with Bilibili or legal approval of a user's intended use.
+- 每次调用只能处理一个明确的 B 站视频链接；
+- 不得增加播放列表、批量链接文件、账号轮换、代理轮换、限速规避、验证码破解、DRM 绕过、付费墙绕过或会员限制绕过功能；
+- 不得增加账号密码、Cookie 字符串、Cookie 文件或浏览器配置文件上传接口；
+- 不得提交真实字幕、视频/音频、浏览器数据库、账号标识或请求日志；
+- 测试只能使用贡献者自行编写的虚构数据；
+- 不得暗示本项目与哔哩哔哩存在隶属、授权、背书关系，也不得暗示任何具体用途已经获得法律认可。
 
-## Development
+## 开发与验证
 
-The runtime code uses only Python's standard library; yt-dlp is launched as a pinned external dependency.
+运行时代码只使用 Python 标准库；yt-dlp 作为固定版本的外部依赖启动。
 
-Run the offline tests:
+运行离线测试：
 
 ```text
 python -m unittest discover -s tests -v
 ```
 
-Validate the plugin and skill manifests with the official Codex plugin/skill validators before submitting a change.
+提交改动前，请使用 Codex 官方插件与 Skill 校验程序检查清单和 Skill 结构。若修改了浏览器支持或依赖版本，还应在实际可行的范围内验证对应浏览器矩阵。
 
-## Pull requests
+## Pull Request
 
-Explain the user need, the smallest behavior change, privacy and platform-term implications, and the tests performed. Dependency updates should link to upstream release information and should be tested against the supported browser matrix where practical.
+提交 Pull Request 时，请说明用户需求、最小行为变化、对隐私和平台条款边界的影响，以及已经执行的测试。依赖更新应附上游发布信息，不要只提交未经说明的版本号变化。

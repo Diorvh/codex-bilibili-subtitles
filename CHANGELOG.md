@@ -1,11 +1,17 @@
-# Changelog
+# 更新日志
 
-All notable changes to this project will be documented here.
+本项目的重要变化将在此记录。
+
+## 未发布
+
+- 将中文说明设为默认仓库主页，并增加独立的完整英文 README；
+- 将贡献、安全、法律边界和排障等用户文档调整为中文；
+- 将插件可见信息调整为中文优先、中英双语，以改善中英文搜索和识别效果。
 
 ## 0.1.0 - 2026-08-19
 
-- Added a Codex skill for authorized, user-operated subtitle extraction.
-- Added subtitle-only extraction for Firefox, Chrome, Edge, Chromium, Brave, Opera, Vivaldi, Whale, and Safari where yt-dlp supports the platform.
-- Added URL validation, single-video enforcement, and an explicit terms acknowledgement gate.
-- Added faithful TXT and time-sectioned Markdown transcript formatting.
-- Added offline tests, privacy and legal guidance, and repository content safeguards.
+- 增加用于用户授权范围内、由用户本人操作的 B 站字幕提取 Codex Skill；
+- 支持在 yt-dlp 与操作系统允许的范围内使用 Firefox、Chrome、Edge、Chromium、Brave、Opera、Vivaldi、Whale 和 Safari，并且只提取字幕；
+- 增加链接校验、单视频限制和显式条款确认门槛；
+- 增加忠实 TXT 文稿和按时间分段的 Markdown 阅读稿；
+- 增加离线测试、隐私和法律边界说明，以及仓库内容保护措施。

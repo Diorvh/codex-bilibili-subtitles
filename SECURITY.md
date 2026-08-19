@@ -1,22 +1,22 @@
-# Security Policy
+# 安全政策
 
-## Supported version
+## 支持版本
 
-Security fixes currently target the latest release on the default branch.
+安全修复目前面向默认分支上的最新版本。
 
-## Reporting a vulnerability
+## 报告安全问题
 
-Do not include passwords, Cookies, browser profiles, personal subtitle files, or other sensitive data in a public issue. Report only the minimum reproducible technical details. Until a private reporting channel is published, open a public issue containing a non-sensitive summary and ask the maintainer for a private contact route.
+请勿在公开 Issue 中提交密码、Cookie、浏览器配置文件、个人字幕文件或其他敏感数据，只提供能够复现问题所必需的最少技术信息。在私密报告渠道公布之前，请先创建一个不含敏感信息的公开 Issue 摘要，并向维护者询问私下联系方法。
 
-## Credential model
+## 凭据模型
 
-This project deliberately does not accept usernames, passwords, session tokens, Cookie strings, exported Cookie files, or copied browser Cookie databases. Authenticated extraction uses yt-dlp's local `--cookies-from-browser` integration and must be initiated manually by the user in their own terminal.
+本项目刻意不接受用户名、密码、会话令牌、Cookie 字符串、导出的 Cookie 文件或复制出来的浏览器 Cookie 数据库。需要登录状态时，提取程序使用 yt-dlp 的本机 `--cookies-from-browser` 集成，并且必须由用户在自己的终端中手动启动。
 
-No design can guarantee that a third-party dependency or locally compromised machine will protect browser data. Review dependency updates, use an isolated Python environment, keep the browser and operating system patched, and run only source code you have inspected.
+任何设计都无法保证第三方依赖或已经受到入侵的本机一定能够保护浏览器数据。请审查依赖更新，使用隔离的 Python 环境，及时更新浏览器和操作系统，并且只运行自己已经检查过的源代码。
 
-## Out of scope
+## 不提供支持的范围
 
-- Requests to defeat CAPTCHA, DRM, paywalls, membership checks, or account controls;
-- support for stolen, shared, or exported credentials;
-- bulk collection, rate-limit evasion, or stealth scraping;
-- redistribution of third-party subtitle content.
+- 绕过验证码、DRM、付费墙、会员检查或账号控制；
+- 使用被盗、共享或导出的凭据；
+- 批量采集、限速规避或隐蔽抓取；
+- 未经授权传播第三方字幕内容。
