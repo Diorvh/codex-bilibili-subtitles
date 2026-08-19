@@ -1,0 +1,4 @@
+interface:
+  display_name: "Bilibili Subtitle Extractor"
+  short_description: "Extract authorized Bilibili subtitles locally"
+  default_prompt: "Use $extract-bilibili-subtitles to extract subtitles from a Bilibili video I am authorized to access."

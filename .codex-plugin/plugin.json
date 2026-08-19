@@ -1,0 +1,32 @@
+{
+  "name": "bilibili-subtitles",
+  "version": "0.1.0",
+  "description": "Extract subtitle tracks from authorized Bilibili videos using a local browser session, then format them as readable transcripts.",
+  "author": {
+    "name": "FLH20",
+    "url": "https://github.com/Diorvh"
+  },
+  "homepage": "https://github.com/Diorvh/codex-bilibili-subtitles#readme",
+  "repository": "https://github.com/Diorvh/codex-bilibili-subtitles",
+  "license": "MIT",
+  "keywords": [
+    "bilibili",
+    "subtitles",
+    "transcript",
+    "yt-dlp",
+    "browser-cookies"
+  ],
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "Bilibili Subtitles",
+    "shortDescription": "Extract authorized subtitles with local browser login",
+    "longDescription": "A privacy-conscious, skills-only plugin for extracting subtitle tracks from individual Bilibili videos that the user is authorized to access. Browser credentials stay local, media is not downloaded, and subtitle files can be converted into readable transcripts.",
+    "developerName": "FLH20",
+    "category": "Productivity",
+    "capabilities": [
+      "Read",
+      "Write"
+    ],
+    "defaultPrompt": "Extract subtitles from a Bilibili video I am authorized to access and turn them into a readable transcript."
+  }
+}
