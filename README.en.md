@@ -1,6 +1,11 @@
-# Bilibili Subtitles
+# Bilibili Subtitle Extractor
 
 [简体中文](README.md)
+
+[![Offline tests](https://github.com/Diorvh/codex-bilibili-subtitles/actions/workflows/test.yml/badge.svg)](https://github.com/Diorvh/codex-bilibili-subtitles/actions/workflows/test.yml)
+[![Python 3.10–3.14](https://img.shields.io/badge/Python-3.10%E2%80%933.14-3776AB?logo=python&logoColor=white)](https://www.python.org/)
+[![MIT License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
+[![Latest release](https://img.shields.io/github/v/release/Diorvh/codex-bilibili-subtitles?display_name=tag)](https://github.com/Diorvh/codex-bilibili-subtitles/releases/latest)
 
 A lightweight, skills-only Codex plugin for extracting an existing subtitle track from one Bilibili video that the user is authorized to access, then producing searchable, readable transcript files locally. The repository includes the skill workflow, directly executable Python scripts, offline tests, and clear privacy and usage boundaries.
 
